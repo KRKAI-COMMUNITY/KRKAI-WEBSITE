@@ -1,0 +1,24 @@
+# Node dependencies — not needed for static hosting
+node_modules/
+
+# Local desktop shortcut
+KRKAI.desktop
+
+# Notes file
+java script.txt
+
+# Debug logs
+*.log
+firebase-debug.log
+
+# Local server scripts (not needed on GitHub Pages)
+serve.py
+run.sh
+
+# Claude Code local settings
+.claude/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KRKAI — Free Robotics Education for Every Orphanage & Government School Child in India. Join the mission to empower 10,000 children by 2027.">
+  <title>KRKAI — Free Education Support For Every Child</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Prevent browser scroll restoration so page always loads at top -->
+  <script>if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }</script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css?v=2">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+  <!-- ============================================ -->
+  <!-- LOADING CURTAIN                              -->
+  <!-- ============================================ -->
+  <div id="loading-curtain">
+    <div class="loading-content">
+      <img src="images/logo.png" alt="KRKAI — கற்கை" class="loading-logo" id="loading-logo">
+      <p class="loading-text" data-key="loading_text">Scroll to begin the journey</p>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- THREE.JS CANVAS (fixed behind everything)    -->
+  <!-- ============================================ -->
+  <canvas id="three-canvas"></canvas>
+
+  <!-- ============================================ -->
+  <!-- VIGNETTE + FILM GRAIN OVERLAYS               -->
+  <!-- ============================================ -->
+  <div id="vignette-overlay"></div>
+  <div id="grain-overlay"></div>
+  <div id="godray-overlay" aria-hidden="true"></div>
+
+  <!-- ============================================ -->
+  <!-- MAGICAL OVERLAYS (fireflies, fog, petals)    -->
+  <!-- ============================================ -->
+  <div id="firefly-overlay" aria-hidden="true"></div>
+  <div id="fog-overlay" aria-hidden="true"></div>
+  <div id="petal-overlay" aria-hidden="true"></div>
+
+  <!-- ============================================ -->
+  <!-- SEC 0: LANGUAGE TOGGLE BAR                   -->
+  <!-- ============================================ -->
+  <div id="lang-bar">
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <span class="lang-divider">|</span>
+    <button class="lang-btn" data-lang="ta">தமிழ்</button>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- SEC 1: NAVIGATION                            -->
+  <!-- ============================================ -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <img src="images/logo.png" alt="KRKAI Logo" id="krkai-logo">
+        <span class="logo-text">KRKAI</span>
+      </a>
+      <button id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-links">
+        <li><a href="#section-problem" data-key="nav_problem">The Problem</a></li>
+        <li><a href="#section-program" data-key="nav_program">Program</a></li>
+        <li><a href="#section-impact" data-key="nav_impact">Impact</a></li>
+        <li><a href="#section-stories" data-key="nav_stories">Stories</a></li>
+        <li><a href="#section-support" data-key="nav_support">Support</a></li>
+        <li><a href="#section-contact" data-key="nav_contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ============================================ -->
+  <!-- SCROLL SPACER (drives 3D animation)          -->
+  <!-- ============================================ -->
+  <div id="scroll-spacer">
+
+    <!-- Scroll indicator -->
+    <div id="scroll-hint" class="content-panel" data-enter="0.00" data-exit="0.04">
+      <div class="scroll-hint-inner">
+        <div class="scroll-arrow"></div>
+        <p data-key="scroll_hint">Scroll to begin</p>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SEC 2: HERO (progress 0.05 - 0.12)          -->
+    <!-- ============================================ -->
+    <div id="section-hero" class="content-panel" data-enter="0.05" data-exit="0.12">
+      <div class="content-card hero-card">
+        <div class="hero-badge" data-key="hero_badge">KRKAI — Free Education Support For Every Child</div>
+        <h1 data-key="hero_title">Technology Should Never Be a Privilege. It Should Be a Right.</h1>
+        <p class="hero-sub" data-key="hero_sub">Free Robotics Education for Every Orphanage &amp; Government School Child</p>
+        <div class="north-star-badges">
+          <span class="ns-badge" data-key="ns_1">🎯 4 Schools</span>
+          <span class="ns-badge" data-key="ns_2">👶 250+ Children</span>
+          <span class="ns-badge" data-key="ns_3">🌟 Free For Every Child</span>
+        </div>
+        <div class="hero-ctas">
+          <a href="#section-program" class="btn btn-gold" data-key="cta_explore">Explore Our Program ↓</a>
+          <a href="#section-support" class="btn btn-outline" data-key="cta_support">Support This Mission ↓</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SEC 3+4: PROBLEM + STATS (progress 0.18-0.28) -->
+    <!-- ============================================ -->
+    <div id="section-problem" class="content-panel" data-enter="0.18" data-exit="0.28">
+      <div class="content-card problem-card">
+        <h2 data-key="problem_title">The Problem — Why This Matters</h2>
+        <div class="stat-list">
+          <div class="stat-item">
+            <span class="stat-number" data-count="73">0</span><span class="stat-suffix">%</span>
+            <p data-key="stat_1">of low-income students in India never reach college</p>
+          </div>
+          <div class="stat-item">
+            <span class="stat-prefix">&lt; </span><span class="stat-number" data-count="3">0</span><span class="stat-suffix">%</span>
+            <p data-key="stat_2">of orphanage children access any STEM education</p>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-count="1.5">0</span><span class="stat-suffix"> Million</span>
+            <p data-key="stat_3">STEM professionals India needs by 2030 — we start with them</p>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-count="4">0</span><span class="stat-suffix">×</span>
+            <p data-key="stat_4">more likely to pursue engineering when exposed to robotics at age 10-14</p>
+          </div>
+        </div>
+        <blockquote class="pull-quote">
+          <p data-key="pull_quote">"They have the same curiosity, the same hunger to build things. They just never got the tools."</p>
+          <cite>— KRKAI</cite>
+        </blockquote>
+
+        <!-- SEC 4: Animated Stats Counter -->
+        <div class="impact-counters">
+          <div class="counter-card">
+            <span class="counter-num" data-count="4">0</span><span class="counter-plus">+</span>
+            <p data-key="counter_1">Workshops Conducted</p>
+          </div>
+          <div class="counter-card">
+            <span class="counter-num" data-count="250+">0</span><span class="counter-plus">+</span>
+            <p data-key="counter_2">Students Impacted</p>
+          </div>
+          <div class="counter-card">
+            <span class="counter-num" data-count="4">0</span><span class="counter-plus">+</span>
+            <p data-key="counter_3">Schools &amp; Orphanages Covered</p>
+          </div>
+          <div class="counter-card">
+            <span class="counter-num" data-count="0">0</span><span class="counter-plus">+</span>
+            <p data-key="counter_4">Free Robotics Kits Given</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SEC 5: MISSION (progress 0.28-0.38)          -->
+    <!-- ============================================ -->
+    <div id="section-mission" class="content-panel" data-enter="0.28" data-exit="0.38">
+      <div class="content-card mission-card">
+        <blockquote class="mission-quote">
+          <p data-key="mission_quote">"We don't just want to teach them. We want to walk with them until they stand on their own."</p>
+        </blockquote>
+        <p class="mission-origin" data-key="mission_origin">KRKAI was born from a simple belief: every child — regardless of background — deserves access to the technologies shaping the future. KRKAI brings free Robotics education directly to orphanages and government schools.</p>
+        <div class="goal-badges">
+          <div class="goal-badge" data-key="goal_1">🎯 20 Orphanages in 4 Years</div>
+          <div class="goal-badge" data-key="goal_2">👶 2000 Children by 2030</div>
+          <div class="goal-badge" data-key="goal_3">🌟 Free Robotics for Every Orphan</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SEC 6: PROGRAM CARDS (progress 0.38-0.48)    -->
+    <!-- ============================================ -->
+    <div id="section-program" class="content-panel" data-enter="0.38" data-exit="0.48">
+      <div class="content-card program-card">
+        <h2 data-key="program_title">What We Offer</h2>
+        <div class="flip-grid">
+          <div class="flip-card">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-icon">🤖</div>
+                <h3 data-key="card1_title">Twice-a-Month Workshops</h3>
+              </div>
+              <div class="flip-back">
+                <p data-key="card1_back">Robotics + career development, every month, at your campus — completely free of cost.</p>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-icon">🎁</div>
+                <h3 data-key="card2_title">Free Robotics Kits</h3>
+              </div>
+              <div class="flip-back">
+                <p data-key="card2_back">After mastering the basics: each child gets their own robotics kit to keep forever.</p>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-icon">💻</div>
+                <h3 data-key="card3_title">Dedicated Coding Setup</h3>
+              </div>
+              <div class="flip-back">
+                <p data-key="card3_back">We install a workspace IN your centre for independent practice between our visits.</p>
+              </div>
+            </div>
+          </div>
+          <div class="flip-card">
+            <div class="flip-inner">
+              <div class="flip-front">
+                <div class="flip-icon">🌟</div>
+                <h3 data-key="card4_title">Mentorship &amp; Placement</h3>
+              </div>
+              <div class="flip-back">
+                <p data-key="card4_back">Personal guidance + direct job opportunity at Karthikesh Robotics for Bright Minds.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SEC 7: TIMELINE (progress 0.48-0.58)         -->
+    <!-- ============================================ -->
+    <div id="section-timeline" class="content-panel" data-enter="0.48" data-exit="0.58">
+      <div class="content-card timeline-card">
+        <h2 data-key="timeline_title">Program Journey</h2>
+        <div class="timeline">
+          <div class="timeline-line"><div class="timeline-fill"></div></div>
+          <div class="timeline-item left">
+            <div class="timeline-dot">1</div>
+            <div class="timeline-content">
+              <h3 data-key="phase1_title">Orientation &amp; Basics</h3>
+              <p data-key="phase1_desc">Introduction to electronics, circuits, and beginner coding.</p>
+            </div>
+          </div>
+          <div class="timeline-item right">
+            <div class="timeline-dot">2</div>
+            <div class="timeline-content">
+              <h3 data-key="phase2_title">Build Your First Robot</h3>
+              <p data-key="phase2_desc">Complete a guided robot build — every student's first creation.</p>
+            </div>
+          </div>
+          <div class="timeline-item left">
+            <div class="timeline-dot">3</div>
+            <div class="timeline-content">
+              <h3 data-key="phase3_title">Kit Distribution</h3>
+              <p data-key="phase3_desc">Each child receives their personal robotics kit to keep.</p>
+            </div>
+          </div>
+          <div class="timeline-item right">
+            <div class="timeline-dot">4</div>
+            <div class="timeline-content">
+              <h3 data-key="phase4_title">Independent Exploration</h3>
+              <p data-key="phase4_desc">Children code and build on their own between our visits.</p>
+            </div>
+          </div>
+          <div class="timeline-item left">
+            <div class="timeline-dot">5</div>
+            <div class="timeline-content">
+              <h3 data-key="phase5_title">Mentorship Begins</h3>
+              <p data-key="phase5_desc">Top students identified, personalized career guidance starts.</p>
+            </div>
+          </div>
+          <div class="timeline-item right">
+            <div class="timeline-dot">6</div>
+            <div class="timeline-content">
+              <h3 data-key="phase6_title">Future Pathways</h3>
+              <p data-key="phase6_desc">University prep, industry connections, direct placement at Karthikesh Robotics After proper Graduation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SEC 8: CHILDREN'S STORIES (progress 0.58-0.68) -->
+    <!-- ============================================ -->
+    <div id="section-stories" class="content-panel" data-enter="0.58" data-exit="0.68">
+      <div class="content-card stories-card">
+        <h2 data-key="stories_title">Stories of Transformation</h2>
+        <div class="stories-grid">
+          <div class="story-card">
+            <div class="story-avatar" style="background: linear-gradient(135deg, #D4AF37, #2A8B7A);"></div>
+            <h3>Arjun, 14</h3>
+            <p class="story-quote" data-key="story1_quote">"I had never seen a circuit board. Now I've built my own robot."</p>
+            <p class="story-outcome" data-key="story1_outcome">Presented project at regional STEM fair</p>
+          </div>
+          <div class="story-card">
+            <div class="story-avatar" style="background: linear-gradient(135deg, #2A8B7A, #8B7D2A);"></div>
+            <h3>Priya, 16</h3>
+            <p class="story-quote" data-key="story2_quote">"KRKAI showed me I could be an engineer. Not just dream about it."</p>
+            <p class="story-outcome" data-key="story2_outcome">Pursuing Computer Science at government college</p>
+          </div>
+          <div class="story-card">
+            <div class="story-avatar" style="background: linear-gradient(135deg, #8B7D2A, #D4AF37);"></div>
+            <h3>Ravi, 13</h3>
+            <p class="story-quote" data-key="story3_quote">"My robot won our school competition. The first trophy I ever held."</p>
+            <p class="story-outcome" data-key="story3_outcome">Selected for KRKAI advanced mentorship track</p>
+          </div>
+        </div>
+        <p class="stories-footnote" data-key="stories_footnote">Names changed. Inspired by real student journeys. Replace with real stories when available.</p>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SEC 9: OUR IMPACT + MAP (progress 0.70-0.76) -->
+    <!-- ============================================ -->
+    <div id="section-impact" class="content-panel" data-enter="0.68" data-exit="0.80">
+      <div class="content-card impact-card-v2">
+        <!-- Decorative golden ornament -->
+        <div class="impact-ornament">
+          <span class="ornament-line"></span>
+          <span class="ornament-diamond"></span>
+          <span class="ornament-line"></span>
+        </div>
+        <h2 data-key="impact_title" class="impact-heading">Our Impact</h2>
+        <p class="impact-tagline">Walk through our 3D workshop Rooms</p>
+        <p class="impact-tagline-sub">Experience the moments that shaped young minds by clicking the rooms below.</p>
+
+        <!-- Stats row -->
+        <div class="impact-stats-bar">
+          <div class="impact-stat">
+            <span class="impact-stat-num">4+</span>
+            <span class="impact-stat-label">Workshops</span>
+          </div>
+          <div class="impact-stat-divider"></div>
+          <div class="impact-stat">
+            <span class="impact-stat-num">250+</span>
+            <span class="impact-stat-label">Students</span>
+          </div>
+          <div class="impact-stat-divider"></div>
+          <div class="impact-stat">
+            <span class="impact-stat-num">4</span>
+            <span class="impact-stat-label">Schools</span>
+          </div>
+        </div>
+
+        <!-- Room enter buttons -->
+        <div class="room-buttons" id="room-buttons">
+          <!-- Built dynamically by js/rooms.js -->
+        </div>
+
+        <p class="impact-cta">Click a room to explore the photo gallery</p>
+
+        <!-- Bottom ornament -->
+        <div class="impact-ornament">
+          <span class="ornament-line"></span>
+          <span class="ornament-diamond"></span>
+          <span class="ornament-line"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SEC 10: GALLERY (progress 0.76-0.82)         -->
+    <!-- ============================================ -->
+    <div id="section-gallery" class="content-panel" data-enter="0.78" data-exit="0.87">
+      <div class="content-card gallery-card">
+        <h2 data-key="gallery_title">Gallery</h2>
+
+        <div id="gallery-wrapper">
+
+          <!-- 3D Globe — default view -->
+          <div id="gallery-globe">
+            <canvas id="gallery-canvas"></canvas>
+            <div id="gallery-globe-info">
+              <p id="gallery-globe-caption"></p>
+            </div>
+            <button id="gallery-toggle-grid" aria-label="Switch to grid view">⊞ Grid View</button>
+          </div>
+
+          <!-- Grid view — shown on toggle -->
+          <div id="gallery-grid" style="display:none;">
+            <!-- Populated dynamically from gallery/ folder -->
+          </div>
+          <button id="gallery-exit-globe" style="display:none;" aria-label="Back to globe">◎ Globe View</button>
+
+        </div>
+
+        <p class="gallery-caption" data-key="gallery_caption">Past workshops at Government Schools — Porur, Avadi, Chennai, Chembarambakkam.//Click and Drag for exploring//</p>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- LIGHTBOX OVERLAY                             -->
+    <!-- ============================================ -->
+    <div id="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+      <div id="lightbox-backdrop"></div>
+      <div id="lightbox-container">
+        <button id="lightbox-close" aria-label="Close photo">✕</button>
+        <button id="lightbox-prev" aria-label="Previous photo">&#8249;</button>
+        <button id="lightbox-next" aria-label="Next photo">&#8250;</button>
+        <img id="lightbox-img" src="" alt="" />
+        <p id="lightbox-caption"></p>
+        <p id="lightbox-counter"></p>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SEC 11: VIDEO (progress 0.90-0.95)           -->
+    <!-- ============================================ -->
+    <div id="section-video" class="content-panel" data-enter="0.87" data-exit="0.97">
+      <div class="content-card video-card">
+        <h2 data-key="video_title">See KRKAI in Action</h2>
+        <p class="video-sub" data-key="video_sub">Watch what happens when a child builds their first robot</p>
+        <div class="video-placeholder cinematic-video">
+          <div class="cinematic-glow"></div>
+          <svg class="play-icon cinematic-play" viewBox="0 0 64 64" width="80" height="80">
+            <circle cx="32" cy="32" r="30" fill="rgba(5,11,10,0.6)" stroke="#D4AF37" stroke-width="2"/>
+            <polygon points="26,20 26,44 46,32" fill="#D4AF37"/>
+          </svg>
+          <p>Watch Our Impact Video</p>
+          <!-- <iframe width="100%" height="400" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe> -->
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /scroll-spacer -->
+
+  <!-- ============================================ -->
+  <!-- NORMAL SCROLL SECTIONS (after 3D experience) -->
+  <!-- Canvas fades out, these become visible        -->
+  <!-- ============================================ -->
+  <div id="normal-scroll-sections">
+
+      <!-- SEC 12: ABOUT & FOUNDER -->
+      <section id="section-contact" class="normal-section">
+        <div class="section-inner about-layout">
+          <div class="about-text">
+            <h2 data-key="about_title">About KRKAI &amp; Founder</h2>
+            <div class="founder-info">
+              <div class="founder-avatar"></div>
+              <div>
+                <h3>EVERY VOLUNTEER IS A FOUNDER</h3>
+                <p class="founder-role" data-key="founder_role">Founder, A Group of Engineering Students</p>
+              </div>
+            </div>
+            <p data-key="founder_bio">KRKAI was born from a simple belief: every child — regardless of background — deserves access to the technologies shaping the future. A Group of Engineering Students founded KRKAI to bring free robotics education directly to orphanages and government schools. What started as weekend workshops has grown into a movement reaching hundreds of students across Tamil Nadu. The goal is not charity — it is empowerment. Every child trained is a future engineer, inventor, or entrepreneur.</p>
+          </div>
+          <div class="founder-card-float">
+            <div class="contact-card">
+              <p>📞 <a href="tel:7548832497">7548832497</a></p>
+              <p>📧 <a href="mailto:krkaifreeforall@gmail.com">krkaifreeforall@gmail.com</a></p>
+              <p>🌐 <a href="https://karthikeshrobotics.in" target="_blank" rel="noopener">karthikeshrobotics.in</a></p>
+              <p>💼 <a href="https://linkedin.com/company/karthikesh-robotics" target="_blank" rel="noopener">LinkedIn: Karthikesh Robotics</a></p>
+              <p>💼 <a href="https://linkedin.com/company/krkai-community" target="_blank" rel="noopener">LinkedIn: KRKAI Community</a></p>
+              <p>📸 <a href="https://instagram.com/karthikesh_robotics" target="_blank" rel="noopener">@karthikesh_robotics</a></p>
+              <p>📸 <a href="https://instagram.com/krkai_community" target="_blank" rel="noopener">@krkai_community</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEC 13: CORPORATE CSR HUB -->
+      <section id="section-csr" class="normal-section">
+        <div class="section-inner">
+          <h2 data-key="csr_title">Corporate CSR Hub</h2>
+          <div class="csr-layout">
+            <div class="csr-pitch">
+              <h3 data-key="csr_headline">Make Your CSR Count. Tangibly.</h3>
+              <ul class="csr-points">
+                <li data-key="csr_point1">100% of your funding goes to kits, travel, and setup</li>
+                <li data-key="csr_point2">Trackable impact: X students, X schools, X cities — with photos</li>
+                <li data-key="csr_point3">Your brand associated with India's first free robotics for orphans mission</li>
+              </ul>
+              <div class="partner-logos">
+                <div class="partner-placeholder">Add Partner Logo</div>
+                <div class="partner-placeholder">Add Partner Logo</div>
+              </div>
+              <a href="#section-support" class="btn btn-gold" data-key="csr_cta">Become a CSR Partner →</a>
+            </div>
+            <div class="csr-calculator">
+              <h3 data-key="calc_title">CSR Impact Calculator</h3>
+              <label data-key="calc_label">Fund <span id="calc-students">10</span> students</label>
+              <input type="range" id="csr-slider" min="1" max="200" value="10">
+              <div class="calc-result">
+                <p data-key="calc_kits">Your <span id="calc-amount">₹15,000</span> will provide:</p>
+                <p id="calc-detail"><strong><span id="calc-kits-num">10</span></strong> complete robotics kits + <strong><span id="calc-sessions-num">1</span></strong> <span id="calc-sessions-word">workshop session</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEC 14: VOLUNTEER WITH US -->
+      <section id="section-volunteer" class="normal-section">
+        <div class="section-inner">
+          <h2 data-key="volunteer_title">Volunteer With Us</h2>
+          <div class="volunteer-grid">
+            <div class="volunteer-card">
+              <h3 data-key="vol1_title">Workshop Volunteer</h3>
+              <p data-key="vol1_desc">Assist at on-site sessions (1 day/month)</p>
+            </div>
+            <div class="volunteer-card">
+              <h3 data-key="vol2_title">Robotics Mentor</h3>
+              <p data-key="vol2_desc">Guide a student's project remotely (1 hr/week)</p>
+            </div>
+            <div class="volunteer-card">
+              <h3 data-key="vol3_title">Kit Assembly Helper</h3>
+              <p data-key="vol3_desc">Help assemble and test kits at our base</p>
+            </div>
+          </div>
+          <a href="mailto:krkaifreeforall@gmail.com?subject=Volunteer%20Signup" class="btn btn-outline" data-key="vol_cta">I Want to Volunteer →</a>
+        </div>
+      </section>
+
+      <!-- SEC 15: SUPPORT — DUAL PANEL -->
+      <section id="section-support" class="normal-section">
+        <div class="section-inner">
+          <h2 data-key="support_title">Support This Mission</h2>
+          <div class="support-dual">
+            <!-- Left: Institutions -->
+            <div class="support-panel institution-panel">
+              <h3 data-key="inst_title">Invite KRKAI to Your Orphanage or School</h3>
+              <p data-key="inst_sub">We'll come to you. No cost. No conditions. Just opportunity.</p>
+              <form id="institution-form" class="inst-form">
+                <input type="text" id="inst-name" placeholder="Institution Name" required>
+                <input type="text" id="inst-contact" placeholder="Your Name" required>
+                <input type="text" id="inst-city" placeholder="City" required>
+                <textarea id="inst-message" placeholder="Message (optional)" rows="3"></textarea>
+                <button type="submit" class="btn btn-gold" data-key="inst_submit">Send Invitation →</button>
+              </form>
+              <p class="inst-phone">📞 <a href="tel:7548832497">7548832497</a></p>
+            </div>
+            <!-- Right: Donors -->
+            <div class="support-panel donor-panel">
+              <h3 data-key="donor_title">Fund a Child's Future</h3>
+              <div class="donation-tiers">
+                <div class="tier-card" data-amount="1500">
+                  <span class="tier-amount">₹1,500</span>
+                  <p data-key="tier1_desc">One complete robotics kit for one child</p>
+                </div>
+                <div class="tier-card" data-amount="10000">
+                  <span class="tier-amount">₹10,000</span>
+                  <p data-key="tier2_desc">One full workshop session (30 students)</p>
+                </div>
+                <div class="tier-card" data-amount="50000">
+                  <span class="tier-amount">₹50,000</span>
+                  <p data-key="tier3_desc">One month of full program at one orphanage</p>
+                </div>
+                <div class="tier-card" data-amount="100000">
+                  <span class="tier-amount">₹1,00,000</span>
+                  <p data-key="tier4_desc">Sponsor an entire term — 30 children, 2 months</p>
+                </div>
+              </div>
+              <div class="upi-placeholder">
+                <p>UPI QR Code — Coming Soon</p>
+                <p>Replace with your QR image</p>
+              </div>
+              <a href="mailto:krkaifreeforall@gmail.com?subject=Donation%20Inquiry" class="btn btn-outline" data-key="donate_cta">Donate via Email →</a>
+              <p class="donor-note" data-key="donor_note">100% of donations fund kits, travel, and workspace setup.</p>
+            </div>
+          </div>
+          <!-- PDF Download -->
+          <div class="pdf-download">
+            <button id="download-pdf" class="btn btn-gold" data-key="pdf_btn">📄 Download Our Full Proposal (PDF)</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEC 16: FOOTER -->
+      <footer id="section-footer">
+        <div class="section-inner footer-inner">
+          <div class="footer-logo">
+            <img src="images/logo.png" alt="KRKAI" class="footer-logo-img">
+          </div>
+          <p class="footer-tagline" data-key="footer_tagline">Free for Every Child Who Deserves Better.</p>
+          <div class="footer-links">
+            <a href="https://karthikeshrobotics.in" target="_blank" rel="noopener">🌐 Website</a>
+            <a href="https://linkedin.com/company/karthikesh-robotics" target="_blank" rel="noopener">💼 LinkedIn</a>
+            <a href="https://linkedin.com/company/krkai-community" target="_blank" rel="noopener">💼 KRKAI LinkedIn</a>
+            <a href="https://instagram.com/karthikesh_robotics" target="_blank" rel="noopener">📸 Instagram</a>
+            <a href="https://instagram.com/krkai_community" target="_blank" rel="noopener">📸 KRKAI Instagram</a>
+            <a href="tel:7548832497">📞 7548832497</a>
+            <a href="mailto:krkaifreeforall@gmail.com">📧 Email</a>
+          </div>
+          <p class="footer-copy">&copy; 2025 KRKAI — Karthikesh Robotics | All programs are completely free of cost</p>
+          <p class="footer-motto" data-key="footer_motto">Technology is a right, not a privilege.</p>
+        </div>
+      </footer>
+
+  </div><!-- /normal-scroll-sections -->
+
+  <!-- ============================================ -->
+  <!-- PERSISTENT: INIIBO ROBOT (bottom-right)      -->
+  <!-- ============================================ -->
+  <div id="iniibo-float">
+    <svg viewBox="0 0 60 70" width="60" height="70" class="iniibo-svg">
+      <!-- Body -->
+      <rect x="15" y="25" width="30" height="30" rx="6" fill="#19443C" stroke="#D4AF37" stroke-width="1.5"/>
+      <!-- Head -->
+      <rect x="18" y="10" width="24" height="18" rx="5" fill="#19443C" stroke="#D4AF37" stroke-width="1.5"/>
+      <!-- Eyes -->
+      <circle cx="25" cy="19" r="3" fill="#050B0A"/>
+      <circle cx="35" cy="19" r="3" fill="#050B0A"/>
+      <circle cx="26" cy="18" r="1" fill="#D4AF37"/>
+      <circle cx="36" cy="18" r="1" fill="#D4AF37"/>
+      <!-- Antenna -->
+      <line x1="30" y1="10" x2="30" y2="3" stroke="#D4AF37" stroke-width="1.5"/>
+      <circle cx="30" cy="2" r="2" fill="#D4AF37" class="antenna-glow"/>
+      <!-- Arms -->
+      <line x1="15" y1="35" x2="8" y2="42" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+      <line x1="45" y1="35" x2="52" y2="42" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+      <!-- Legs -->
+      <line x1="23" y1="55" x2="23" y2="65" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+      <line x1="37" y1="55" x2="37" y2="65" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+      <!-- Mouth -->
+      <path d="M24,24 Q30,28 36,24" fill="none" stroke="#050B0A" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <div class="iniibo-tooltip" data-key="iniibo_tooltip">Hello! I'm INIIBO, your guide to KRKAI 🤖</div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PERSISTENT: WHATSAPP FLOAT (bottom-left)     -->
+  <!-- ============================================ -->
+  <a id="whatsapp-float" href="https://wa.me/917548832497?text=Hi%20KRKAI!%20I%27d%20like%20to%20partner%20%2F%20support%20your%20mission." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" width="32" height="32">
+      <path d="M16,3C8.8,3,3,8.8,3,16c0,2.3,0.6,4.5,1.7,6.4L3,29l6.8-1.7C11.6,28.4,13.7,29,16,29c7.2,0,13-5.8,13-13S23.2,3,16,3z M23.4,21.4c-0.3,0.9-1.8,1.7-2.5,1.8c-0.7,0.1-1.3,0.3-4.3-0.9c-3.6-1.5-5.9-5.2-6.1-5.4c-0.2-0.2-1.5-2-1.5-3.8s0.9-2.7,1.3-3.1c0.3-0.4,0.7-0.5,1-0.5s0.6,0,0.8,0c0.3,0,0.6-0.1,1,0.7c0.4,0.8,1.2,2.8,1.3,3c0.1,0.2,0.2,0.5,0,0.7c-0.1,0.3-0.2,0.4-0.4,0.6c-0.2,0.2-0.4,0.5-0.6,0.6c-0.2,0.2-0.4,0.4-0.2,0.8c0.3,0.4,1.1,1.8,2.4,2.9c1.6,1.4,3,1.8,3.4,2c0.4,0.2,0.7,0.1,0.9-0.1c0.3-0.3,1-1.2,1.3-1.6c0.3-0.4,0.5-0.3,0.9-0.2c0.4,0.2,2.3,1.1,2.7,1.3c0.4,0.2,0.7,0.3,0.8,0.5C23.7,19.9,23.7,20.5,23.4,21.4z" fill="#FFFFFF"/>
+    </svg>
+  </a>
+
+  <!-- ============================================ -->
+  <!-- CINEMATIC CURSOR ELEMENTS                    -->
+  <!-- ============================================ -->
+  <!-- Unified Cursor elements removed per user feedback to keep original look -->
+
+  <!-- ============================================ -->
+  <!-- 3D PHOTO ROOM OVERLAY                        -->
+  <!-- ============================================ -->
+  <div id="room-overlay" class="room-overlay hidden">
+    <canvas id="room-canvas"></canvas>
+
+    <!-- Top bar: room switcher + tour + sound + exit -->
+    <div id="room-topbar">
+      <div id="room-switcher"></div>
+      <div class="room-topbar-right">
+        <span id="room-version" style="font-size:10px;opacity:0.45;color:#D4AF37;align-self:center;margin-right:6px;">v12</span>
+        <button id="room-tour-btn" class="room-icon-btn" title="Auto Tour">&#9654;</button>
+        <button id="room-sound-btn" class="room-icon-btn" title="Toggle Sound">&#128263;</button>
+        <button id="room-exit-btn" class="btn btn-gold room-exit">EXIT ROOM</button>
+      </div>
+    </div>
+
+    <!-- Wall minimap (top-left) -->
+    <div id="room-minimap">
+      <button class="room-wall-chip" data-wall="0">Back</button>
+      <button class="room-wall-chip" data-wall="2">Left</button>
+      <button class="room-wall-chip" data-wall="3">Right</button>
+      <button class="room-wall-chip" data-wall="1">Front</button>
+    </div>
+
+    <!-- Progress bar (top) -->
+    <div id="room-progress-bar"><div id="room-progress-fill"></div></div>
+
+    <!-- Loading text -->
+    <div id="room-loading" class="room-loading">Loading room...</div>
+
+    <!-- Caption tooltip -->
+    <div id="room-caption"></div>
+
+    <!-- Prev / Next navigation arrows -->
+    <button id="room-prev-btn" class="room-nav-btn room-nav-prev">&#10094;</button>
+    <button id="room-next-btn" class="room-nav-btn room-nav-next">&#10095;</button>
+
+    <!-- Thumbnail strip (bottom) -->
+    <div id="room-thumbs-wrap">
+      <div id="room-thumbs"></div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- SCRIPTS (CDN + local, loaded in order)       -->
+  <!-- ============================================ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/utils/BufferGeometryUtils.js"></script>
+  <!-- Post-processing pipeline (Phase 2: HDR bloom + FXAA) -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/BokehShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/BokehPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/FXAAShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="js/particles.config.js?v=5"></script>
+  <script src="js/magical-overlays.js?v=1"></script>
+  <script src="js/scene.js?v=14"></script>
+  <script src="js/pen.js?v=19"></script>
+  <script src="js/iniibo.js?v=6"></script>
+  <!-- God-ray light shaft (toggled by scroll.js based on scroll progress) -->
+  <script src="js/scroll.js?v=13"></script>
+  <script src="js/i18n.js?v=7"></script>
+  <script src="js/features.js?v=6"></script>
+  <!-- gl-matrix for WebGL globe gallery (local copy) -->
+  <script src="js/gl-matrix-min.js"></script>
+  <script src="js/gallery.js?v=12"></script>
+  <script src="js/rooms.js?v=12"></script>
+  <script src="js/cursor.js?v=6"></script>
+  <script src="js/app.js?v=6"></script>
+
+</body>
+</html>
